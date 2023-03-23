@@ -29,6 +29,11 @@ const options = {
       return null;
     }
     dateButton.disabled = false;
+    const timeArray = convertMs(dateSum);
+    daysDis.innerHTML = timeArray.days;
+    hoursDis.innerHTML = timeArray.hours;
+    minDis.innerHTML = timeArray.minutes;
+    secDis.innerHTML = timeArray.seconds;
     return dateSum;
   },
 };
@@ -81,12 +86,8 @@ function countdown() {
   const todayDate = new Date();
   const callendarDate = new Date(callendar.value);
   const dateSum = callendarDate - todayDate;
-  const timeArray = convertMs(dateSum);
-  daysDis.innerHTML = timeArray.days;
-  hoursDis.innerHTML = timeArray.hours;
-  minDis.innerHTML = timeArray.minutes;
-  secDis.innerHTML = timeArray.seconds;
-  const timer = setInterval(showingTime, 1000);
+
+  const timer = setInterval(dateSum, 1000);
 }
 
 // function addLeadingZero(value) {
