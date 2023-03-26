@@ -14,6 +14,10 @@ const secDis = document.querySelector('[data-seconds]');
 
 dateButton.disabled = true;
 
+function addLeadingZero(value) {
+  const strValue = String(value);
+  return strValue.padStart(2, '0');
+}
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -30,10 +34,10 @@ const options = {
     }
     dateButton.disabled = false;
     const timeArray = convertMs(dateSum);
-    daysDis.innerHTML = timeArray.days;
-    hoursDis.innerHTML = timeArray.hours;
-    minDis.innerHTML = timeArray.minutes;
-    secDis.innerHTML = timeArray.seconds;
+    daysDis.innerHTML = addLeadingZero(timeArray.days);
+    hoursDis.innerHTML = addLeadingZero(timeArray.hours);
+    minDis.innerHTML = addLeadingZero(timeArray.minutes);
+    secDis.innerHTML = addLeadingZero(timeArray.seconds);
     return dateSum;
   },
 };
@@ -81,16 +85,17 @@ for (let i = 0; i < dateTextBoxValue.length; i++) {
 }
 
 dateButton.addEventListener('click', countdown);
+
 function countdown() {
   dateButton.disabled = true;
-  const todayDate = new Date();
-  const callendarDate = new Date(callendar.value);
-  const dateSum = callendarDate - todayDate;
-
-  const timer = setInterval(dateSum, 1000);
+  timeChanger = setInterval(() => {
+    let todayDate = new Date();
+    let callendarDate = new Date(callendar.value);
+    let dateSum = callendarDate - todayDate;
+    let timeArray = convertMs(dateSum);
+    daysDis.innerHTML = addLeadingZero(timeArray.days);
+    hoursDis.innerHTML = addLeadingZero(timeArray.hours);
+    minDis.innerHTML = addLeadingZero(timeArray.minutes);
+    secDis.innerHTML = addLeadingZero(timeArray.seconds);
+  }, 1000);
 }
-
-// function addLeadingZero(value) {
-//     const strValue = String(value);
-//     return strValue.padStart(2, '0');
-//   }
