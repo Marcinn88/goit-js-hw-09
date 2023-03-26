@@ -8,7 +8,7 @@ const body = document.querySelector('body');
 const colorChanger2 = () => {
   console.log(stopButton);
 };
-
+let timeChanger = null;
 stopButton.disabled = true;
 
 const colorChanger = () => {
