@@ -88,7 +88,7 @@ dateButton.addEventListener('click', countdown);
 
 function countdown() {
   dateButton.disabled = true;
-  timeChanger = setInterval(() => {
+  let timeChanger = setInterval(() => {
     let todayDate = new Date();
     let callendarDate = new Date(callendar.value);
     let dateSum = callendarDate - todayDate;
@@ -97,5 +97,13 @@ function countdown() {
     hoursDis.innerHTML = addLeadingZero(timeArray.hours);
     minDis.innerHTML = addLeadingZero(timeArray.minutes);
     secDis.innerHTML = addLeadingZero(timeArray.seconds);
+    if (dateSum < 0) {
+      clearInterval(timeChanger);
+      alert('Timer end');
+      daysDis.innerHTML = '00';
+      hoursDis.innerHTML = '00';
+      minDis.innerHTML = '00';
+      secDis.innerHTML = '00';
+    }
   }, 1000);
 }
